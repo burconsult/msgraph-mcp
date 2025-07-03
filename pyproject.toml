@@ -1,0 +1,62 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "msgraph-mcp"
+version = "0.1.0"
+description = "MCP server client implementation for Microsoft Graph v2 beta"
+authors = [{name = "MCP Microsoft Graph", email = "dev@example.com"}]
+license = {text = "MIT"}
+readme = "README.md"
+requires-python = ">=3.10"
+keywords = ["mcp", "microsoft-graph", "model-context-protocol", "ai", "graph-api"]
+
+dependencies = [
+    "mcp>=1.0.0",
+    "pydantic>=2.0.0",
+    "httpx>=0.25.0",
+    "azure-identity>=1.15.0",
+    "msgraph-core>=1.0.0",
+    "msgraph-beta-sdk-python>=1.0.0",
+    "python-dotenv>=1.0.0",
+    "asyncio-throttle>=1.0.0",
+    "tenacity>=8.0.0"
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-asyncio>=0.21.0",
+    "black>=23.0.0",
+    "mypy>=1.0.0",
+    "ruff>=0.1.0"
+]
+
+[project.scripts]
+msgraph-mcp = "msgraph_mcp.__main__:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-dir]
+"" = "src"
+
+[tool.black]
+target-version = ["py310"]
+line-length = 88
+
+[tool.mypy]
+python_version = "3.10"
+strict = true
+warn_return_any = true
+warn_unused_configs = true
+
+[tool.ruff]
+target-version = "py310"
+line-length = 88
+select = ["E", "F", "UP", "B", "SIM", "I"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
